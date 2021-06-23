@@ -24,34 +24,18 @@ if (is_tax('product_category')) {
     $data['category'] = new Term(get_queried_object_id());
     // $data['categories'] = Timber::get_terms(['taxonomy' => 'product_category', 'hide_empty' => false]);
     array_unshift($templates, 'template-products.twig');
-
+    
+    **This is the query i am working on and i dont know where should i pass that to
+     $data['customquery'] = new PostQuery([
+        'post_type' => 'product',
+         'posts_per_page' => -1,
+        'meta_key' => 'product_order',
+         'orderby' => 'meta_value',
+        'order' => 'desc'
+     ]);**
+        
 }
 
-
-
-
-
-
-if (is_post_type_archive('recipe')) {
-    $data['title'] = post_type_archive_title('', false);
-    $data['categories'] = Timber::get_terms(['taxonomy' => 'recipe_category', 'hide_empty' => false]);
-    array_unshift($templates, 'template-recipes.twig');
-}
-if (is_tax('recipe_category')) {
-    $data['category'] = new Term(get_queried_object_id());
-    $data['categories'] = Timber::get_terms(['taxonomy' => 'recipe_category', 'hide_empty' => false]);
-    array_unshift($templates, 'template-recipes.twig');
-}
-if (is_post_type_archive('download')) {
-    $data['title'] = post_type_archive_title('', false);
-    $data['categories'] = Timber::get_terms(['taxonomy' => 'download_category', 'hide_empty' => false, 'parent' => 0]);
-    array_unshift($templates, 'template-downloads.twig');
-}
-if (is_tax('download_category')) {
-    $data['category'] = new Term(get_queried_object_id());
-    $data['categories'] = Timber::get_terms(['taxonomy' => 'download_category', 'hide_empty' => false, 'parent' => 0]);
-    array_unshift($templates, 'template-downloads.twig');
-}
 
 
 Timber::render($templates, $data);
