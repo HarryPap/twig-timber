@@ -1,0 +1,17 @@
+{% extends "base.twig" %}
+{% block content %}
+  <div class="products__content">
+            <div class="max-width">
+                <div class="flex flex-teases">
+
+                    {% if posts|length > 0 %}
+                        {% for post in posts %}
+                            <div class="show-in-view">{{ post.meta('product_order') }}{% include ['tease-'~post.post_type~'.twig', 'tease.twig'] %}</div>
+                        {% endfor %}
+                    {% else %}
+                        <span class="no-results">{{ __('Δε βρέθηκαν αποτελέσματα.', 'vg') }}</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endblock %}
